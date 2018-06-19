@@ -1,11 +1,11 @@
 #!/bin/bash
 
-TITLE="TrackMania Nations Forever"
+TITLE="3CX Desktop Client"
 NOTICE="The ${TITLE} snap is experimental, built
 with development releases of upstream WINE and may not function as
 expected.\n\nIf you encounter issues please report them on the
 ${TITLE} snap issue tracker:
-\n\nhttps://github.com/Snapcrafters/tmnationsforever"
+\n\nhttps://github.com/liberavia/tmnationsforever"
 
 function install_app() {
   # Install additional requirements via winetricks here
@@ -22,7 +22,7 @@ function install_app() {
     perl -p -e '$| = 1; s/^.* +([0-9]+%) +([0-9,.]+[GMKB]) +([0-9hms,.]+).*$/\1\n# Downloading... \2 (\3)/' | \
     yad --progress --title="${INSTALL_EXE}" --width=400 --center --no-buttons --auto-close --auto-kill --on-top --no-escape
     # Installs the wine application
-    env WINEARCH="${WINEARCH}" WINEPREFIX="${WINEPREFIX}" "${WINELOADER}" "${TMPDIR}/${INSTALL_EXE}" /silent
+    env WINEARCH="${WINEARCH}" WINEPREFIX="${WINEPREFIX}" "${MSIINSTALL}" /i "${TMPDIR}/${INSTALL_EXE}" /silent
     # Removes the cached installer
     rm -v "${TMPDIR}/${INSTALL_EXE}"
 
@@ -32,10 +32,6 @@ function install_app() {
 }
 
 function launch_app() {
-  # Suppress pop-ups about graphics performance by faking the results
-  mkdir -p "${WINEPREFIX}/drive_c/users/${USER}/My Documents/TmForever/Config"
-  touch "${WINEPREFIX}/drive_c/users/${USER}/My Documents/TmForever/Config/GfxDevicePerfs.txt"
-
   # If we don't change into the program directory some assets may not be found
   cd "${WINE_DIR}"
 
@@ -100,6 +96,7 @@ fi
 export WINEVERPATH=$SNAP
 export WINESERVER=$SNAP/bin/wineserver
 export WINELOADER=$SNAP/bin/wine
+export MSIINSTALL=$SNAP/bin/msiexec
 export WINETRICKS=$SNAP/bin/winetricks
 export winepath=$SNAP/bin/winepath
 export WINEDLLPATH=$SNAP/lib/wine/fakedlls
@@ -218,7 +215,7 @@ if [ ! -f "${WINEPREFIX}/drive_c/windows/win.ini" ]; then
   fi
 else
   # Notification
-  notify-send --icon "${SNAP}/meta/gui/tmnationsforever.png" --expire-time=15000 "${TITLE}" "${NOTICE}"
+  notify-send --icon "${SNAP}/meta/gui/3cxclient.png" --expire-time=15000 "${TITLE}" "${NOTICE}"
 fi
 
 # Launch wineboot/winecfg/winetricks if requested.

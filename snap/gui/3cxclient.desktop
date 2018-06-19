@@ -1,12 +1,12 @@
 [Desktop Entry]
 Type=Application
 Encoding=UTF-8
-Name=TmNationsForever
-Comment=TrackMania Nations Forever
-Exec=tmnationsforever
+Name=3CXClient
+Comment=3CX Desktop Client
+Exec=3cxclient
 Icon=${SNAP}/meta/gui/tmnationsforever.png
-Categories=Game;
+Categories=Network;Office;
 Terminal=false
 StartupNotify=true
-StartupWMClass=tmforeverlauncher.exe
+StartupWMClass=3CXWin8Phone.exe
 Keywords=game

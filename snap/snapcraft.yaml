@@ -1,15 +1,9 @@
-name: tmnationsforever
-version: '2.11.26'
-summary: TrackMania Nations Forever
+name: 3cxclient
+version: '15.5'
+summary: 3CX Desktop Client
 description: |
- The most popular online PC racing game. It fuels 7 different racing
- environments; hundreds of thousands of tracks and millions of players to
- compete with. You can download the car you are dreaming of, paint it, drive it
- through insane tracks made of loopings, ramps and off roads. It is all about
- you, your driving skills and the track in front of you.
- .
- Just to make sure we understand each other: this is pure arcade driving
- madness.
+ The 3CX clients allow you to take your extension with you
+ anywhere and never miss a call again.
 
 grade: stable
 confinement: strict
@@ -18,33 +12,13 @@ architectures:
     run-on: [amd64, i386]
 
 apps:
-  tmnationsforever:
-    command: bin/sommelier "$WINEPREFIX/drive_c/Program Files/TmNationsForever/TmForever.exe"
+  3cxclient:
+    command: bin/sommelier "$WINEPREFIX/dosdevices/c\:/ProgramData/3CXPhone\ for\ Windows/PhoneApp/3CXWin8Phone.exe"
     environment:
       WINEPREFIX: "$SNAP_USER_COMMON/.wine"
       DLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
-      INSTALL_URL: "http://files.trackmaniaforever.com/tmnationsforever_setup.exe"
-      VIRTDESKTOP: 1
-      LC_ALL: "C.UTF-8"
-    plugs:
-      - desktop
-      - desktop-legacy
-      - hardware-observe
-      - home
-      - joystick
-      - network
-      - network-bind
-      - opengl
-      - pulseaudio
-      - wayland
-      - x11
-  launcher:
-    command: bin/sommelier "$WINEPREFIX/drive_c/Program Files/TmNationsForever/TmForeverLauncher.exe"
-    environment:
-      WINEPREFIX: "$SNAP_USER_COMMON/.wine"
-      DLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
-      INSTALL_URL: "http://files.trackmaniaforever.com/tmnationsforever_setup.exe"
-      VIRTDESKTOP: 1
+      INSTALL_URL: "http://downloads.3cx.com/downloads/3CXPhoneforWindows15.msi"
+      TRICKS: "win8 corefonts d3dx9_43 dotnet452"
       LC_ALL: "C.UTF-8"
     plugs:
       - desktop
@@ -219,7 +193,7 @@ parts:
     after:
       - enable-i386
 
-  tmnationsforever:
+  3cxclient:
     plugin: dump
     build-attributes:
       - no-system-libraries
