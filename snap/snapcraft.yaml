@@ -13,12 +13,11 @@ architectures:
 
 apps:
   3cxclient:
-    command: bin/sommelier "$WINEPREFIX/dosdevices/c\:/ProgramData/3CXPhone\ for\ Windows/PhoneApp/3CXWin8Phone.exe"
+    command: bin/sommelier $WINEPREFIX/drive_c/ProgramData/3CXPhone\ for\ Windows/PhoneApp/3CXWin8Phone.exe
     environment:
       WINEPREFIX: "$SNAP_USER_COMMON/.wine"
-      DLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
       INSTALL_URL: "http://downloads.3cx.com/downloads/3CXPhoneforWindows15.msi"
-      TRICKS: "win8 corefonts d3dx9_43 dotnet452"
+      TRICKS: "dotnet452 win8"
       LC_ALL: "C.UTF-8"
     plugs:
       - desktop
@@ -171,7 +170,7 @@ parts:
       - libxslt1.1:i386
       - libxxf86vm1:i386
       # Required for authentication - Observed in Steam and Track Mania
-      - winbind:i386
+      - winbind
       - samba-libs:i386
     override-build: |
       snapcraftctl build
